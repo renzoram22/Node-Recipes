@@ -7,7 +7,10 @@ const validarJWT =  (req,res = response) => {
     let decoded = jwt.decode(auth, process.env.SECRETKEY, true);
     console.log(decoded);
     const {uid} = decoded;
-    return uid;
+    if(uid){
+      return uid;
+    }
+    return null;
 };
 
 module.exports = {
