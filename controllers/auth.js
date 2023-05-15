@@ -15,14 +15,14 @@ const signup = async (req, res = response) => {
     usuario.password = bcryptjs.hashSync(password, salt);
 
     await usuario.save();
+    console.log(usuario._id)
     
     const token = await generarJWT(usuario._id);
     res.status(200).json({
       email: usuario.email,
       localId: usuario.localId,
-      idToken: usuario.idToken,
-      expiresIn: usuario.expiresIn,
-      token,
+      idToken: token,
+      expiresIn: usuario.expiresIn
     });
   } catch (error) {
     res.status(400).json({
